@@ -1,0 +1,15 @@
+langchain==0.1.9
+langchain-community==0.0.24
+gpt4all==2.2.1.post1
+chromadb==0.4.23
+llama-cpp-python==0.2.50
+urllib3==2.2.1
+PyMuPDF==1.23.25
+python-dotenv==1.0.1
+unstructured==0.12.4
+extract-msg==0.47.0
+tabulate==0.9.0
+pandoc==2.3
+pypandoc==1.13
+tqdm==4.66.2
+sentence_transformers==2.4.0
