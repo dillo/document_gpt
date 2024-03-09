@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 import glob
 import os
 from multiprocessing import Pool
@@ -10,35 +11,11 @@ from typing import List
 from config import *
 
 # NLTKTextSplitter
-class DocumentProcessor:
-    """
-    Class for processing documents.
-
-    Args:
-        config (ConfigurationManager): The configuration manager object.
-
-    Attributes:
-        config (ConfigurationManager): The configuration manager object.
-
-    Methods:
-        process_documents: Process the documents.
-        __load_documents__: Load the documents.
-        __load_single_document__: Load a single document.
-    """
-
-    def __init__(self, config: ConfigurationManager):
+class Processor:
+    def __init__(self, config: Manager):
         self.config = config
 
     def process_documents(self, ignored_files: List[str] = []) -> List[str]:
-        """
-        Process the documents.
-
-        Args:
-            ignored_files (List[str], optional): List of files to ignore. Defaults to [].
-
-        Returns:
-            List[str]: List of processed texts.
-        """
         print(f"Loading documents from {self.config.source_directory}")
 
         documents = self.__load_documents__(
@@ -59,16 +36,6 @@ class DocumentProcessor:
         return texts
 
     def __load_documents__(self, source_dir: str, ignored_files: List[str] = []) -> List[Document]:
-        """
-        Load the documents.
-
-        Args:
-            source_dir (str): The source directory.
-            ignored_files (List[str], optional): List of files to ignore. Defaults to [].
-
-        Returns:
-            List[Document]: List of loaded documents.
-        """
         all_files = []
 
         for ext in self.config.loader_mapping:
@@ -88,18 +55,6 @@ class DocumentProcessor:
         return documents
 
     def __load_single_document__(self, file_path: str) -> List[Document]:
-        """
-        Load a single document.
-
-        Args:
-            file_path (str): The file path of the document.
-
-        Returns:
-            List[Document]: List of loaded documents.
-
-        Raises:
-            ValueError: If the file extension is not supported.
-        """
         ext = os.path.splitext(file_path)[1]
 
         if ext in self.config.loader_mapping:

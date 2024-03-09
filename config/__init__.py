@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 
-from .configuration_manager import ConfigurationManager
+from .manager import Manager
 
-__all__ = ["ConfigurationManager"]
+__all__ = ["Manager"]
