@@ -10,7 +10,7 @@ from langchain.docstore.document import Document
 from typing import List
 from config import *
 
-# NLTKTextSplitter
+
 class Processor:
     def __init__(self, config: Manager):
         self.config = config
@@ -18,7 +18,7 @@ class Processor:
     def process_documents(self, ignored_files: List[str] = []) -> List[str]:
         print(f"Loading documents from {self.config.source_directory}")
 
-        documents = self.__load_documents__(
+        documents = self.load_documents(
             self.config.source_directory, ignored_files)
 
         if not documents:
@@ -35,7 +35,7 @@ class Processor:
 
         return texts
 
-    def __load_documents__(self, source_dir: str, ignored_files: List[str] = []) -> List[Document]:
+    def load_documents(self, source_dir: str, ignored_files: List[str] = []) -> List[Document]:
         all_files = []
 
         for ext in self.config.loader_mapping:
@@ -48,13 +48,13 @@ class Processor:
         documents = []
 
         with Pool(processes=os.cpu_count()) as pool, tqdm(total=len(filtered_files), desc='Loading documents', ncols=80) as pbar:
-            for docs in pool.imap_unordered(self.__load_single_document__, filtered_files):
+            for docs in pool.imap_unordered(self.load_single_document, filtered_files):
                 documents.extend(docs)
                 pbar.update()
 
         return documents
 
-    def __load_single_document__(self, file_path: str) -> List[Document]:
+    def load_single_document(self, file_path: str) -> List[Document]:
         ext = os.path.splitext(file_path)[1]
 
         if ext in self.config.loader_mapping:

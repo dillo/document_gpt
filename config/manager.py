@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import os
-from loaders import *
+from langchain_community.document_loaders import *
 
 
 class Manager:
@@ -18,15 +18,16 @@ class Manager:
         self.chunk_size = 512
         self.chunk_overlap = 64
         self.loader_mapping = {
-            ".csv": MyCSVLoader,
-            ".pdf": MyPDFLoader,
-            ".eml": MyEmlLoader,
-            ".txt": MyTextLoader,
-            ".doc": MyDocLoader,
-            ".docx": MyDocLoader,
-            ".ppt": MyPPTLoader,
-            ".pptx": MyPPTLoader,
-            ".odt": MyODTLoader,
-            ".md": MyMarkdownLoader,
-            ".html": MyHTMLLoader,
+            ".csv": CSVLoader,
+            ".pdf": PyMuPDFLoader,
+            ".txt": TextLoader,
+            ".doc": UnstructuredWordDocumentLoader,
+            ".docx": UnstructuredWordDocumentLoader,
+            ".ppt": UnstructuredPowerPointLoader,
+            ".pptx": UnstructuredPowerPointLoader,
+            ".odt": UnstructuredODTLoader,
+            ".md": UnstructuredMarkdownLoader,
+            ".html": UnstructuredHTMLLoader,
+            ".epub": UnstructuredEPubLoader,
+            ".enex": EverNoteLoader,
         }
