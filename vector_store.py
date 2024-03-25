@@ -7,7 +7,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from config import *
 
 
-class Manager:
+class VectorStore:
     def __init__(self, config: Manager):
         self.config = config
         self.embeddings = HuggingFaceEmbeddings(
